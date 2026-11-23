@@ -1,0 +1,31 @@
+---
+import Card from '@/components/ui/Card.astro';
+import { getExampleItems } from '../api/getExampleData';
+
+const items = await getExampleItems();
+---
+
+<Card class="max-w-md">
+  <div class="mb-4 flex items-center justify-between">
+    <h3 class="text-lg font-semibold text-white">Feature Example</h3>
+    <span class="rounded-full bg-indigo-500/10 px-2.5 py-0.5 text-xs font-medium text-indigo-400">
+      src/features/example
+    </span>
+  </div>
+  <ul class="space-y-2.5">
+    {items.map((item) => (
+      <li class="flex items-center justify-between text-sm">
+        <span class="text-slate-300">{item.name}</span>
+        <span
+          class={`text-xs px-2 py-0.5 rounded-full capitalize font-mono ${
+            item.status === 'completed'
+              ? 'bg-emerald-500/10 text-emerald-400'
+              : 'bg-amber-500/10 text-amber-400'
+          }`}
+        >
+          {item.status}
+        </span>
+      </li>
+    ))}
+  </ul>
+</Card>
